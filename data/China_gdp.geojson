@@ -1,0 +1,594 @@
+{
+   "type": "FeatureCollection",
+   "features": [
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 121.3895874,31.1645851 ]
+    },
+    "properties": {
+    "Admin_division":"Shanghai",
+    "gdp_1980":2227,
+    "gdp_1985":2249,
+    "gdp_1990":2884,
+    "gdp_1995":5366,
+    "gdp_2000":9132,
+    "gdp_2005":14401,
+    "gdp_2008":17510,
+    "gdp_2009":18398,
+    "gdp_2010":19344
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 116.3842697,40.1637573 ]
+    },
+    "properties": {
+    "Admin_division":"Beijing",
+    "gdp_1980":1262,
+    "gdp_1985":1560,
+    "gdp_1990":2262,
+    "gdp_1995":3830,
+    "gdp_2000":7333,
+    "gdp_2005":13341,
+    "gdp_2008":17475,
+    "gdp_2009":18741,
+    "gdp_2010":19311
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 117.3035812,39.2892151 ]
+    },
+    "properties": {
+    "Admin_division":"Tianjin",
+    "gdp_1980":1109,
+    "gdp_1985":1280,
+    "gdp_1990":1702,
+    "gdp_1995":2948,
+    "gdp_2000":5274,
+    "gdp_2005":10963,
+    "gdp_2008":15345,
+    "gdp_2009":16645,
+    "gdp_2010":18561
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 119.4206619,32.9779549 ]
+    },
+    "properties": {
+    "Admin_division":"Jiangsu",
+    "gdp_1980":442,
+    "gdp_1985":621,
+    "gdp_1990":1029,
+    "gdp_1995":2209,
+    "gdp_2000":3576,
+    "gdp_2005":7140,
+    "gdp_2008":10468,
+    "gdp_2009":11772,
+    "gdp_2010":13436
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 120.0227737,29.1648922 ]
+    },
+    "properties": {
+    "Admin_division":"Zhejiang",
+    "gdp_1980":385,
+    "gdp_1985":630,
+    "gdp_1990":1043,
+    "gdp_1995":2459,
+    "gdp_2000":4077,
+    "gdp_2005":7850,
+    "gdp_2008":10832,
+    "gdp_2009":11662,
+    "gdp_2010":13149
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 113.6940079,44.2556305 ]
+    },
+    "properties": {
+    "Admin_division":"Inner Mongolia",
+    "gdp_1980":295,
+    "gdp_1985":477,
+    "gdp_1990":721,
+    "gdp_1995":1138,
+    "gdp_2000":1976,
+    "gdp_2005":4724,
+    "gdp_2008":9122,
+    "gdp_2009":10570,
+    "gdp_2010":12039
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 113.3931961,23.3641453 ]
+    },
+    "properties": {
+    "Admin_division":"Guangdong",
+    "gdp_1980":393,
+    "gdp_1985":605,
+    "gdp_1990":1212,
+    "gdp_1995":2453,
+    "gdp_2000":3871,
+    "gdp_2005":7149,
+    "gdp_2008":9847,
+    "gdp_2009":10490,
+    "gdp_2010":11375
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 122.5685349,41.316761 ]
+    },
+    "properties": {
+    "Admin_division":"Liaoning",
+    "gdp_1980":663,
+    "gdp_1985":834,
+    "gdp_1990":1317,
+    "gdp_1995":2076,
+    "gdp_2000":3397,
+    "gdp_2005":5533,
+    "gdp_2008":8303,
+    "gdp_2009":9350,
+    "gdp_2010":10770
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 118.0826263,36.3261299 ]
+    },
+    "properties": {
+    "Admin_division":"Shandong",
+    "gdp_1980":328,
+    "gdp_1985":523,
+    "gdp_1990":886,
+    "gdp_1995":1721,
+    "gdp_2000":2834,
+    "gdp_2005":5782,
+    "gdp_2008":8617,
+    "gdp_2009":9548,
+    "gdp_2010":10452
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 117.9523087,26.0828342 ]
+    },
+    "properties": {
+    "Admin_division":"Fujian",
+    "gdp_1980":284,
+    "gdp_1985":435,
+    "gdp_1990":860,
+    "gdp_1995":1970,
+    "gdp_2000":3402,
+    "gdp_2005":5323,
+    "gdp_2008":7784,
+    "gdp_2009":8894,
+    "gdp_2010":10177
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 126.1430893,43.6854324 ]
+    },
+    "properties": {
+    "Admin_division":"Jilin",
+    "gdp_1980":364,
+    "gdp_1985":512,
+    "gdp_1990":852,
+    "gdp_1995":1329,
+    "gdp_2000":2234,
+    "gdp_2005":3872,
+    "gdp_2008":6153,
+    "gdp_2009":7074,
+    "gdp_2010":8035
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 116.075264,39.5433044 ]
+    },
+    "properties": {
+    "Admin_division":"Hebei",
+    "gdp_1980":349,
+    "gdp_1985":424,
+    "gdp_1990":715,
+    "gdp_1995":1341,
+    "gdp_2000":2307,
+    "gdp_2005":4252,
+    "gdp_2008":6013,
+    "gdp_2009":6539,
+    "gdp_2010":7290
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 112.2429733,30.9754181 ]
+    },
+    "properties": {
+    "Admin_division":"Hubei",
+    "gdp_1980":350,
+    "gdp_1985":472,
+    "gdp_1990":752,
+    "gdp_1995":1108,
+    "gdp_2000":1913,
+    "gdp_2005":3351,
+    "gdp_2008":5195,
+    "gdp_2009":6032,
+    "gdp_2010":7096
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 107.8508148,30.0489902 ]
+    },
+    "properties": {
+    "Admin_division":"Chongqing",
+    "gdp_1980":292,
+    "gdp_1985":368,
+    "gdp_1990":576,
+    "gdp_1995":1186,
+    "gdp_2000":1907,
+    "gdp_2005":3598,
+    "gdp_2008":5361,
+    "gdp_2009":6097,
+    "gdp_2010":7017
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 108.8429871,35.2056923 ]
+    },
+    "properties": {
+    "Admin_division":"Shaanxi",
+    "gdp_1980":273,
+    "gdp_1985":356,
+    "gdp_1990":606,
+    "gdp_1995":895,
+    "gdp_2000":1510,
+    "gdp_2005":3096,
+    "gdp_2008":5154,
+    "gdp_2009":5838,
+    "gdp_2010":6899
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 127.7493668,47.8990326 ]
+    },
+    "properties": {
+    "Admin_division":"Heilongjiang",
+    "gdp_1980":567,
+    "gdp_1985":627,
+    "gdp_1990":990,
+    "gdp_1995":1630,
+    "gdp_2000":2521,
+    "gdp_2005":4188,
+    "gdp_2008":5688,
+    "gdp_2009":5971,
+    "gdp_2010":6885
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 106.1565933,37.2693291 ]
+    },
+    "properties": {
+    "Admin_division":"Ningxia",
+    "gdp_1980":353,
+    "gdp_1985":435,
+    "gdp_1990":680,
+    "gdp_1995":1041,
+    "gdp_2000":1634,
+    "gdp_2005":3002,
+    "gdp_2008":5130,
+    "gdp_2009":5793,
+    "gdp_2010":6845
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 112.2555847,37.5739708 ]
+    },
+    "properties": {
+    "Admin_division":"Shanxi",
+    "gdp_1980":361,
+    "gdp_1985":494,
+    "gdp_1990":746,
+    "gdp_1995":1061,
+    "gdp_2000":1739,
+    "gdp_2005":3668,
+    "gdp_2008":5626,
+    "gdp_2009":5725,
+    "gdp_2010":6683
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 85.2505112,41.2742424 ]
+    },
+    "properties": {
+    "Admin_division":"Xinjiang",
+    "gdp_1980":335,
+    "gdp_1985":484,
+    "gdp_1990":836,
+    "gdp_1995":1419,
+    "gdp_2000":2241,
+    "gdp_2005":3802,
+    "gdp_2008":5179,
+    "gdp_2009":5305,
+    "gdp_2010":6366
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 111.6971588,27.6037712 ]
+    },
+    "properties": {
+    "Admin_division":"Hunan",
+    "gdp_1980":298,
+    "gdp_1985":369,
+    "gdp_1990":599,
+    "gdp_1995":1014,
+    "gdp_2000":1649,
+    "gdp_2005":3064,
+    "gdp_2008":4748,
+    "gdp_2009":5434,
+    "gdp_2010":6286
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 113.580925,33.8779335 ]
+    },
+    "properties": {
+    "Admin_division":"Henan",
+    "gdp_1980":259,
+    "gdp_1985":342,
+    "gdp_1990":532,
+    "gdp_1995":995,
+    "gdp_2000":1656,
+    "gdp_2005":3291,
+    "gdp_2008":5018,
+    "gdp_2009":5479,
+    "gdp_2010":6216
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 96.0209351,35.7706413 ]
+    },
+    "properties": {
+    "Admin_division":"Qinghai",
+    "gdp_1980":387,
+    "gdp_1985":477,
+    "gdp_1990":760,
+    "gdp_1995":1060,
+    "gdp_2000":1562,
+    "gdp_2005":2914,
+    "gdp_2008":4819,
+    "gdp_2009":5175,
+    "gdp_2010":6132
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 109.7417908,19.1949692 ]
+    },
+    "properties": {
+    "Admin_division":"Hainan",
+    "gdp_1980":"N/A",
+    "gdp_1985":430,
+    "gdp_1990":762,
+    "gdp_1995":1528,
+    "gdp_2000":2066,
+    "gdp_2005":3238,
+    "gdp_2008":4628,
+    "gdp_2009":5122,
+    "gdp_2010":6060
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 115.6918411,27.6045837 ]
+    },
+    "properties": {
+    "Admin_division":"Jiangxi",
+    "gdp_1980":279,
+    "gdp_1985":352,
+    "gdp_1990":553,
+    "gdp_1995":874,
+    "gdp_2000":1474,
+    "gdp_2005":2738,
+    "gdp_2008":4160,
+    "gdp_2009":4611,
+    "gdp_2010":5404
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 102.7281723,30.6195335 ]
+    },
+    "properties": {
+    "Admin_division":"Sichuan",
+    "gdp_1980":261,
+    "gdp_1985":336,
+    "gdp_1990":554,
+    "gdp_1995":918,
+    "gdp_2000":1506,
+    "gdp_2005":2628,
+    "gdp_2008":4054,
+    "gdp_2009":4612,
+    "gdp_2010":5386
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 117.200943,31.8226204 ]
+    },
+    "properties": {
+    "Admin_division":"Anhui",
+    "gdp_1980":238,
+    "gdp_1985":381,
+    "gdp_1990":577,
+    "gdp_1995":926,
+    "gdp_2000":1453,
+    "gdp_2005":2503,
+    "gdp_2008":3780,
+    "gdp_2009":4365,
+    "gdp_2010":5311
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 108.7796478,23.8410645 ]
+    },
+    "properties": {
+    "Admin_division":"Guangxi",
+    "gdp_1980":227,
+    "gdp_1985":278,
+    "gdp_1990":520,
+    "gdp_1995":997,
+    "gdp_2000":1414,
+    "gdp_2005":2492,
+    "gdp_2008":3833,
+    "gdp_2009":4268,
+    "gdp_2010":5141
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 88.2402496,31.7402668 ]
+    },
+    "properties": {
+    "Admin_division":"Tibet Autonomous Region",
+    "gdp_1980":385,
+    "gdp_1985":528,
+    "gdp_1990":623,
+    "gdp_1995":712,
+    "gdp_2000":1390,
+    "gdp_2005":2621,
+    "gdp_2008":3617,
+    "gdp_2009":4069,
+    "gdp_2010":4404
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 101.0212631,37.8691139 ]
+    },
+    "properties": {
+    "Admin_division":"Gansu",
+    "gdp_1980":317,
+    "gdp_1985":359,
+    "gdp_1990":536,
+    "gdp_1995":699,
+    "gdp_2000":1255,
+    "gdp_2005":2169,
+    "gdp_2008":3250,
+    "gdp_2009":3530,
+    "gdp_2010":4097
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 101.5036545,24.9799309 ]
+    },
+    "properties": {
+    "Admin_division":"Yunnan",
+    "gdp_1980":218,
+    "gdp_1985":287,
+    "gdp_1990":597,
+    "gdp_1995":930,
+    "gdp_2000":1450,
+    "gdp_2005":2265,
+    "gdp_2008":3289,
+    "gdp_2009":3601,
+    "gdp_2010":4005
+    }
+  },
+  {
+    "type": "Feature",
+    "geometry": {
+       "type": "Point",
+       "coordinates":  [ 106.8675079,26.812685 ]
+    },
+    "properties": {
+    "Admin_division":"Guizhou",
+    "gdp_1980":179,
+    "gdp_1985":248,
+    "gdp_1990":395,
+    "gdp_1995":551,
+    "gdp_2000":839,
+    "gdp_2005":1565,
+    "gdp_2008":2578,
+    "gdp_2009":2918,
+    "gdp_2010":3336
+    }
+  }
+]
+}
