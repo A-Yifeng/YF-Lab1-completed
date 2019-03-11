@@ -1,4 +1,171 @@
 /* Stylesheet by Yifeng Ai, 2019 */
-#mapid {
-   height: 900px;
+/*#mapid {
+	width: 80%;
+   height: 800px;
+}*/
+
+.leaflet-popup-content p {
+    margin: 0.2em 0;
+}
+
+.range-slider {
+	width: 50%;
+}
+
+#forward {
+	float: right;
+}
+
+#reverse {
+	float: left;
+}
+
+#map {
+	height: 725px;
+	width: 72%;
+	display: inline-block;
+}
+
+#panel {
+	width: 400px;
+	height: 725px;
+	padding: 5px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	line-height: 50px;
+}
+
+#updatable {
+	text-align: center !important;
+	line-height: 500px !important;
+}
+
+#updatable-admin {
+	text-align: left !important;
+	line-height: 20px !important;
+}
+
+#updatable-gdp {
+	text-align: left !important;
+	line-height: 20px !important;
+}
+
+
+/* Below shows the compare operator formatting*/
+
+#compare {
+	width: 400px;
+	height: 725px;
+	padding: 4px;
+	display: inline-block;
+	vertical-align: top;
+	top: 40px;
+	text-align: left;
+	line-height: 3px;
+}
+
+.yr_text {
+  	position: relative !important;
+  	left:36px;
+  	bottom:50px;
+  	text-align:justify;
+  	color: white !important;
+  	font-size:50px;
+  	text-shadow: 4px 4px 15px red;
+}
+
+.image_button {
+	opacity: 0.7;
+ 	float: left !important;
+	width: 45% !important;
+ 	margin-left: 7px;
+ 	margin-right: 7px;
+ 	margin-bottom: 7px;
+ 	margin-top: 7px;
+ }
+
+#to_comparison {
+	text-align: center;
+	font-size: 16px;
+	background-color: #a3a3a3;
+	display: inline-block;
+	padding: 15px 25px
+}
+
+#end_comparison {
+	text-align: center;
+	font-size:16px;
+	background-color: #cc3333;
+	display: inline-block;
+	padding: 15px 11px;
+}
+
+#exit_result {
+	text-align: center;
+	font-size:16px;
+	background-color: #cc3333;
+	display: inline-block;
+	padding: 15px 11px;
+	margin-bottom: -15px;
+}
+
+#compareResult {
+	width: 400px;
+	height: 725px;
+	padding: 4px;
+	display: inline-block;
+	vertical-align: top;
+	text-align: left;
+	line-height: 3px;
+}
+
+#compareInfo {
+	text-align: left !important;
+	line-height: 20px !important;
+	margin-bottom: -12px;
+}
+
+#compare_popup {
+	text-align: left;
+	line-height: 10px;
+	margin: 0px;
+	padding: 0px;
+}
+
+.c_p_basic {
+	padding-bottom: 10px;
+	font-size:12px;
+}
+
+.c_p_detail {
+	line-height: 20px;
+	margin-top: -5px;
+	font-size:12px;
+}
+
+#compareRanking {
+	line-height: 2px;
+}
+
+.perc_j {
+	text-align: left;
+	padding-top: 18px;
+	padding-left: 256px;
+}
+
+.perc_j_NA {
+	text-align: left;
+	padding-top: 18px;
+	padding-left: 221px !important;
+}
+
+.admin_j {
+	text-align: left;
+	margin-top: -2px;
+	padding-left: 10px;
+}
+
+.notif {
+	margin-top:300px;
 }
