@@ -7,6 +7,7 @@ var yrSelectedArr = new Array
 var circle2
 var markerG = new Array
 var data2Yrs = new Array
+var checkNotif
 
 //function to instantiate the Leaflet map
 function createMap() {
@@ -37,7 +38,7 @@ function onEachFeature(feature, layer) {
     };
 };
 
-function calcR(map,attrValue) {
+function calcR(attrValue) {
 	// calculate
 	return Math.sqrt((attrValue * 0.5)/Math.PI) * 0.8
 }
@@ -58,13 +59,14 @@ function processData(data) {
 	return attributes
 }
 
-function pointToLayer(map, feature,latlng,attributes) {
+function pointToLayer(feature,latlng,attributes) {
 	// get the key name of the first item: gdp for 1980
 	var attr = attributes[0]
 
 	// get actual value of gdp of 1980
 	var attrValue = Number(feature.properties[attr])
 
+	var radius = calcR(attrValue)
 	// formatting circle marker
 	var options = {
 		fillColor: "#ff7800",
@@ -72,32 +74,15 @@ function pointToLayer(map, feature,latlng,attributes) {
 		weight: 1,
 		opacity: 1,
 		fillOpacity: 0.6,
-		radius: calcR(map,attrValue)
+		radius: radius
 	}
 
-
+	var proprts = feature.properties
 	// "Circle-Marker" layer is added as a leaflet layer
 	var cmLayer = L.circleMarker(latlng,options)
+	console.log('prt', proprts)
+	createPopupCntnt(cmLayer, radius, proprts, attr)
 
-	// initial popup content only shows names of administrative divisions
-	var popupCntnt = feature.properties.Admin_division
-
-	// popup is bindeed to "Circle Marker" layer, with an offset to the position on screen that is clicked by the user
-	cmLayer.bindPopup(popupCntnt, {
-		offset: new L.Point(0, -options.radius),
-		closeButton: false
-	})
-
-	// "Circle Marker" layer opens and closes popup per different input event
-	cmLayer.on({
-		mouseover: function() {
-			this.openPopup()
-		},
-		mouseout: function() {
-			this.closePopup()
-		},
-	})
-	// return "Circle Marker" layer to createPropSymbols
 	return cmLayer
 }
 
@@ -106,9 +91,15 @@ function createPropSymbols(data, map, attributes) {
 		pointToLayer: function(feature,latlng) {
 			// In order to set Layer as the only parametre, pointToLayer function is used to add the "Circle Marker" layer
 			// as a parameter
-			return pointToLayer(map, feature, latlng, attributes)
+			var proprt = feature.properties
+			var str = JSON.stringify(proprt)
+			console.log('STR',str)
+
+			var proprts = proprt
+			return pointToLayer(feature, latlng, attributes)
 		}	
 	}).addTo(map)
+	//return proprt
 }
 
 function updatePanelContent(admin, year, gdp) {
@@ -118,6 +109,34 @@ function updatePanelContent(admin, year, gdp) {
 		'</p>' + '<p id="updatable-gdp"><b>GDP(ppp) per capita in year ' + year + ': </b><br>' + gdp + 
 		' USD<br></p>' + '</div>'
 	$('#panel').append(panelCntnt)
+}
+
+function createPopupCntnt(layer, radius, proprts, attribute) {
+	// set radius
+	layer.setRadius(radius)
+
+	// add newer, more detailed popup to each layer and bind the popup
+	var admin = proprts.Admin_division
+	var popupCntnt = "<p><b>Administrative division:</b>" + admin + "</p>"
+	var year = attribute.split('_')[1]
+	var gdpThisYr = proprts[attribute]
+	popupCntnt += "<p><b>GDP(ppp) per capita in year " + year +  " :</b> $" + gdpThisYr + "</p>"
+	layer.bindPopup(popupCntnt, {
+		offset: new L.Point(0, -radius)
+	})
+	$(layer).on({
+		// upon click, the popup will still remain on the screen even after mouseout; this popup will close and a
+		// new popup will open -- only after the user mouses over a new Circle Marker
+		mouseover: function() {
+			layer.openPopup()
+		},
+		mouseout: function () {
+			layer.closePopup()
+		},
+		click: function() {
+			updatePanelContent(admin, year, gdpThisYr)
+		}
+	})
 }
 
 function updatePropSymbols(map, attribute) {
@@ -130,63 +149,59 @@ function updatePropSymbols(map, attribute) {
 			var proprts = layer.feature.properties
 
 			// calculate radius of the reset Circle Marker
-			var radius = calcR(map, proprts[attribute])
+			var radius = calcR(proprts[attribute])
 
-			// set radius
-			layer.setRadius(radius)
-
-			// add newer, more detailed popup to each layer and bind the popup
-			var admin = proprts.Admin_division
-			var popupCntnt = "<p><b>Administrative division:</b>" + admin + "</p>"
-			var year = attribute.split('_')[1]
-			var gdpThisYr = proprts[attribute]
-			popupCntnt += "<p><b>GDP(ppp) per capita in year " + year +  " :</b> $" + gdpThisYr + "</p>"
-			layer.bindPopup(popupCntnt, {
-				offset: new L.Point(0, -radius)
-			})
-
-			$(layer).click(function() {
-				// upon click, the popup will still remain on the screen even after mouseout; this popup will close and a
-				// new popup will open -- only after the user mouses over a new Circle Marker
-				updatePanelContent(admin, year, gdpThisYr)
-				this.on({
-					mouseout: function(){	
-						this.openPopup()
-					}
-				})
-			})
+			createPopupCntnt(layer, radius, proprts, attribute)
 		}
 	})
 }
 
-function createSeqCtrl(map,attributes) {
-	// add range slider to the <div> with the id of "panel"
-	/*map.eachLayer(function(layer) {
-		layer.feature*/
-	$('#updatable').empty()
-	$('#panel').append('<input class="range-slider" type="range">')
-	$('.range-slider').attr({
-		max: 8,
-		min: 0,
-		value: 0,
-		step: 1
+function updateNotif(index) {
+	$('#notif').remove()
+	iNum = parseInt(index)
+	// add a notification that shows current year the slider is on
+	// If index of the slider is greater than 5, use a different equation, because 2008, 2009, and 2010 does not 
+	// follow the previous pattern of intervals of 5 (1980, 1985, 1990, 1995, 2000 and 2005).
+    var year = (iNum > 5) ? (2002 + iNum): (1980 + 5 * iNum)
+    var notif = '<div id="notif">Showing GDP of year ' + year + '</div>'
+    // If '#updatable'(the info panel that shows data of clicked layer in the '#panel') is still empty (still initial value in index.html), 
+	// append notification at the end of the panel, otherwise append before '#updatable'
+	// This ensure that the relative position of "#updatable" and "#notif" remains unchanged when the user performs any
+	// clicking or sliding 
+
+    if (!$('#updatable').is(':empty')) {
+       	$(notif).insertBefore('#updatable')
+    } else {
+       	$('#panel').append(notif)
+    }
+}
+
+function createSeqCtrl_new(map,attributes) {
+	console.log("entering")
+	var seqCtrl = L.Control.extend({
+		options: {
+			position: "bottomleft"
+		},
+		onAdd: function(map) {
+			var container = L.DomUtil.create('div', 'sequence-control-container')
+			$(container).append('<input type="range" class="range-slider-new" min="0" max="8" value="0" step="1">')
+			$(container).append('<button class="skip-new" id="reverse" title="Reverse">Reverse</button>')
+			$(container).append('<button class="skip-new" id="forward" title="Forward">Forward</button>')
+			$('#reverse').html('<img src="data/icon/new_backward.png">')
+			$('#forward').html('<img src="data/icon/new_forward.png">')
+			L.DomEvent.disableClickPropagation(container)
+			return container
+		}
 	})
-	// add reverse and forward buttons
-	$('#panel').append("<button class='skip' id='reverse'>Reverse</button>")
-	$('#panel').append("<button class='skip' id='forward'>Forward</button>")
+	map.addControl(new seqCtrl())
 
-	// use image to represent the butons
-	$('#reverse').html('<img src="data/icon/new_backward.png">')
-	$('#forward').html('<img src="data/icon/new_forward.png">')
+	var index = $('.range-slider-new').val()
+	console.log('INDEX', index)
 
-	// Reset range slider value upon clicking the buttons
-	$('.skip').click(function(){
-		// remove the notification upon a new click
-		$('#notif').remove()
-		var index = $('.range-slider').val()
-
-		// retrive index upon click
+	$('.skip-new').click(function() {
+		var index = $('.range-slider-new').val()		// retrive index upon click
 		if ($(this).attr('id') == 'forward') {
+			console.log("CLICKING1")
 			index ++
 			index = index > 8 ? 0 : index
 		} else if ($(this).attr('id') == 'reverse') {
@@ -194,45 +209,144 @@ function createSeqCtrl(map,attributes) {
 			index = index < 0 ? 8 : index
 		}
 		// update range-slider per index retrived 
-		$('.range-slider').val(index)
+		$('.range-slider-new').val(index)
+		var attr = attributes[index]
+		var yr = attr.split('_')[1]
 
-		// add a notification that shows current year the slider is on
-		// If index of the slider is greater than 5, use a different equation, because 2008, 2009, and 2010 does not 
-		// follow the previous pattern of intervals of 5 (1980, 1985, 1990, 1995, 2000 and 2005).
-        var year = (index > 5) ? (2002 + index): (1980 + 5 * index)
-		var notif = '<div id="notif">Showing GDP of year ' + year + '</div>'
+		updateNotif(index)
+		updateNotif_2(map,yr,attr)
+		updatePropSymbols(map, attr)
+	})
 
-		// If '#updatable'(the info panel that shows data of clicked layer in the '#panel') is still empty (still initial value in index.html), 
-		// append notification at the end of the panel, otherwise append before '#updatable'
-		// This ensure that the relative position of "#updatable" and "#notif" remains unchanged when the user performs any
-		// clicking or sliding 
-        if (!$('#updatable').is(':empty')) {
-       		$(notif).insertBefore('#updatable')
-        } else {
-        	$('#panel').append(notif)
-        }
-       	// update the symbols upon clicking
-		updatePropSymbols(map, attributes[index])
-	});
-
-    // Event handler upon input to the range-slider
-    $('.range-slider').on('input', function(){
+	$('.range-slider-new').on('input', function(){
     	// similar idea to the previous click event handler
-        $('#notif').remove()
         var index = $(this).val()
-        iNum = parseInt(index)
-        var year = (iNum > 5) ? (2002 + iNum): (1980 + 5 * iNum)
-        var notif = '<div id="notif">Showing GDP of year ' + year + '</div>'
-        if (!$('#updatable').is(':empty')) {
-       		$(notif).insertBefore('#updatable')
-        } else {
-        	$('#panel').append(notif)
-        }
-        // update the symbols upon sliding
-        updatePropSymbols(map, attributes[index])
+        var attr = attributes[index]
+		var yr = attr.split('_')[1]
 
-    });
+        updateNotif(index)
+        updateNotif_2(map,yr,attr)
+        updatePropSymbols(map, attr)       	
+    })
 }
+
+function updateNotif_2(map,yr,attr) {
+	if (checkNotif != undefined) {
+		$('.update_notif_C').remove()
+	}
+	var update_notif_2 = L.Control.extend({
+		options: {
+			position: 'bottomright'
+		},
+		onAdd: function(map) {
+			checkNotif = 0
+			var container = L.DomUtil.create('div','update_notif_C')
+			$(container).append('<div id="notif_2">Displaying GDP of year ' + yr + '</div')
+			            //add temporal legend div to container
+
+            //Step 1: start attribute legend svg string
+            var svg = '<svg id="attribute-legend" height="101px" width="195px">';
+
+        	//array of circle names to base loop on
+        	var circles = {
+            	max: 20,
+            	mean: 40,
+            	min: 60
+       	 	};
+
+        	//loop to add each circle and text to svg string
+        	for (var circle in circles){
+            	//circle string
+            	svg += '<circle class="legend-circle" id="' + circle + '" fill="#F47821" fill-opacity="0.8" stroke="#000000" cx="47"/>';
+
+            	//text string
+            	svg += '<text id="' + circle + '-text" x="95" y="' + circles[circle]*1.2 + '"></text>';
+        	};
+
+        	//close svg string
+       	 	svg += "</svg>";
+            
+            $(container).append(svg);
+
+			return container
+		}
+	})
+	map.addControl(new update_notif_2)
+	console.log("creating")
+
+	updateLegend(map, attr)
+
+}
+
+function updateLegend(map, attribute){
+	console.log("INTOO")
+    //create content for legend
+    var year = attribute.split("_")[1];
+    var content = "Population in " + year;
+
+    //replace legend content
+    $('#temporal-legend').html(content);
+
+    //get the max, mean, and min values as an object
+    var circleValues = getCircleValues(map, attribute);
+
+    for (var key in circleValues){
+        //get the radius
+    	var radius = calcR(circleValues[key]);
+        
+        $('#'+key).attr({
+            cy: 59 - radius,
+            r: radius
+        });
+
+        //Step 4: add legend text
+        $('#'+key+'-text').text(Math.round(circleValues[key]*100)/100 + " USD");
+
+        //Step 3: assign the cy and r attributes
+        $('#'+ key).attr({
+            cy: 98 - radius,
+            r: radius
+        });
+
+        $('#attribute-legend').append($('#' + key))
+
+    };
+};
+
+//Calculate the max, mean, and min values for a given attribute
+function getCircleValues(map, attribute){
+    //start with min at highest possible and max at lowest possible number
+    var min = Infinity,
+        max = -Infinity;
+
+    map.eachLayer(function(layer){
+        //get the attribute value
+        if (layer.feature){
+            var attributeValue = Number(layer.feature.properties[attribute]);
+
+            //test for min
+            if (attributeValue < min){
+                min = attributeValue;
+            };
+
+            //test for max
+            if (attributeValue > max){
+                max = attributeValue;
+            };
+        };
+    });
+
+    //set mean
+    var mean = (max + min) / 2;
+
+    //return values as an object
+    return {
+        max: max,
+        mean: mean,
+        min: min
+    };
+};
+
 
 function enableComparisonButtons(map) {
 	// append a series of buttons to '#panel', '#compare' and '#compareResult' interfaces
@@ -272,7 +386,8 @@ function createYrButtons(map) {
 		var buttonNameId_selector = '#' + buttonNameId
 
 		if (i % 2 == 0) {
-			var background_path = '<div class="image_button"><img class="jpg" src="data/yr_background/' + yr + '_v2.jpg"><div class="yr_text">' + yr + '</div></div>'		} else if (i != 2) {
+			var background_path = '<div class="image_button"><img class="jpg" src="data/yr_background/' + yr + '_v2.jpg"><div class="yr_text">' + yr + '</div></div>'		
+			} else if (i != 2) {
 				var background_path = '<div class="image_button"><img class="jpg" src="data/yr_background/' + yr + '_v2.jpg"><div class="yr_text">' + yr + '</div></div>'
 			} else {
 				var background_path = '<div class="image_button"><img class="jpg" src="data/yr_background/' + yr + '_v2.jpg"><div class="yr_text">' + yr + '</div></div>'
@@ -294,7 +409,7 @@ function compareInterface(map,attributes) {
 		$('#panel').show()
 
 		// re-fires updatePropSymbols and panelInterface functions after clicked "end comparison"
-		updatePropSymbols(map, [index])
+		updatePropSymbols(map, attributes[index])
 		panelInterface(map,attributes)
 	})
 	// As a feedback, the clickable image opacity is changed upon mouseover
@@ -509,7 +624,9 @@ function createCompareSymbols(map, attributes, numSelected, yrSelectedArr, data2
 				var proprts = layer.feature.properties
 				console.log('PROPERTIES',proprts)
 
-				var radius = calcR(map, proprts[data2Yrs[i]])
+				var radius = calcR(proprts[data2Yrs[i]])
+
+				var popupRadius = calcR(proprts[data2Yrs[1]])
 
 				var coord = [layer.feature.geometry.coordinates[1], layer.feature.geometry.coordinates[0]]
 				console.log(typeof(coord), coord)
@@ -549,7 +666,7 @@ function createCompareSymbols(map, attributes, numSelected, yrSelectedArr, data2
   						fillOpacity: 0.5
   					}).addTo(map);
 					circle2.bindPopup(popupCntnt, {
-						offset: new L.Point(0, -radius * 0.8),
+						offset: new L.Point(0, -popupRadius * 0.8),
 						opacity:0.8
 					})
 					markerG.push(circle2)
@@ -562,11 +679,11 @@ function createCompareSymbols(map, attributes, numSelected, yrSelectedArr, data2
 						},
 						click: function() {
 							this.openPopup()
-							this.on({
+							/*this.on({
 								mouseout: function(){	
 									this.openPopup()
 								}
-							})
+							})*/
 						}
 					})
 				}
@@ -606,8 +723,8 @@ function getData(map) {
 		success: function(response) {
 			var attributes = processData(response)
 
-			createSeqCtrl(map,attributes)
-			createPropSymbols(response,map,attributes)
+			createPropSymbols(response, map, attributes)
+			createSeqCtrl_new(map,attributes)
 			
 			// The fifth operator: re-expression
 			enableComparisonButtons(map)
